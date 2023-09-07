@@ -1,37 +1,45 @@
- namespace Domino;
+using System;
+using System.Collections.Generic;
+
+namespace Domino
+{
     public class Deck
     {
         private List<Tile> _tilesDeck = new List<Tile>();
         private int _totalSide;
 
-    public Deck()
-    {
-    }
-
-    public Deck(int totalSide)
+        public Deck(int totalSide)
         {
             _totalSide = totalSide;
             CreateTiles();
             Shuffle();
         }
+
+        public Deck()
+        {
+            _totalSide = 6; // Default totalSide if not specified
+            CreateTiles();
+            Shuffle();
+        }
+
         public void CreateTiles()
         {
+            _tilesDeck.Clear(); // Clear existing tiles before creating new ones
+
             HashSet<Tile> uniqueTiles = new HashSet<Tile>();
 
             for (int side1 = 0; side1 <= _totalSide; side1++)
             {
-                for (int side2 = side1; side2 <= 6; side2++)
+                for (int side2 = side1; side2 <= _totalSide; side2++) // Fixed this line
                 {
                     Tile tile = new Tile(side1, side2);
-                    
+
                     if (uniqueTiles.Add(tile))
                     {
                         _tilesDeck.Add(tile);
                     }
                 }
             }
-            //Buat player langsung ambil langsung kartunya
-            //buat method dengan return valuenya dia berhasil atau tidak
         }
 
         public void Shuffle()
@@ -47,4 +55,32 @@
                 _tilesDeck[n] = value;
             }
         }
+
+        public List<int>? GetTileData()
+        {
+            if (_tilesDeck.Count > 0)
+            {
+                List<int> data = new List<int> { _tilesDeck[0].Side1, _tilesDeck[0].Side2 }; // Fixed property names
+                return data;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool RemoveData(List<int> data)
+        {
+            if (_tilesDeck.Count > 0)
+            {
+                Tile tileToRemove = _tilesDeck.Find(tile => tile.Side1 == data[0] && tile.Side2 == data[1]);
+                if (tileToRemove != null)
+                {
+                    _tilesDeck.Remove(tileToRemove);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
+}

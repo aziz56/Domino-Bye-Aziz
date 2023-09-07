@@ -1,6 +1,4 @@
 namespace Domino;
-
-
 public enum TileOrientation
 {
     vertical,
@@ -12,5 +10,3 @@ public enum GameStatus
     winTheGame,
     loseTheGame
 }
-public enum Card
-{}

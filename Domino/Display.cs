@@ -1,88 +1,76 @@
-namespace Domino;
+using System;
+using System.Collections.Generic;
 
-public class Display
+namespace Domino
 {
-    public static void DisplayPlayerTiles(List<Tile> tiles)
+    public class Display
     {
-        int tileIndex = 0;
-        for (int i = 0; i < tiles.Count; i++)
+        public static void DisplayPlayerTiles(List<Tile> tiles)
         {
-            Console.Write($"({i}) {tiles[tileIndex].GetTileSideA()}|{tiles[tileIndex].GetTileSideB()} ");
-            tileIndex++;
-        }
-        Console.WriteLine();
-    }
-    public static void DrawBoard(IBoard board, List<Tile> tilesHorizontal, List<Tile> tilesVertical)
-    {
-        int cellSize = 5;
-        int boardSize = board.GetBoardSize();
-
-        Console.WriteLine($"Setting board boundary condition: {boardSize}");
-        Console.WriteLine(new string('-', (cellSize + 1) * boardSize + 1));
-
-        for (int i = 0; i < boardSize; i++)
-        {
-            for (int j = 0; j < boardSize; j++)
+            for (int i = 0; i < tiles.Count; i++)
             {
-                bool tileFound = false;
-
-                foreach (var tile in tilesHorizontal)
-                {
-                    int x = tile.GetTilePosition().GetPosX();
-                    int y = tile.GetTilePosition().GetPosY();
-
-                    if (x == j && y == i)
-                    {
-                        tileFound = true;
-
-                        if (tile.GetTileOrientation() == TileOrientation.horizontal)
-                        {
-                            Console.Write($" {tile.GetTileSideA()}|{tile.GetTileSideB()} ");
-                        }
-                        else if (tile.GetTileOrientation() == TileOrientation.vertical)
-                        {
-                            Console.Write($" {tile.GetTileSideA()}/{tile.GetTileSideB()} ");
-                        }
-                        break;
-                    }
-                }
-
-                if (!tileFound)
-                {
-                    foreach (var tile in tilesVertical)
-                    {
-                        int a = tile.GetTilePosition().GetPosX();
-                        int b = tile.GetTilePosition().GetPosY();
-
-                        if (a == j && b == i)
-                        {
-                            tileFound = true;
-
-                            if (tile.GetTileOrientation() == TileOrientation.horizontal)
-                            {
-                                Console.Write($" {tile.GetTileSideA()}|{tile.GetTileSideB()} ");
-                            }
-                            else if (tile.GetTileOrientation() == TileOrientation.vertical)
-                            {
-                                Console.Write($" {tile.GetTileSideA()}/{tile.GetTileSideB()} ");
-                            }
-                            break;
-                        }
-                    }
-                }
-
-                if (!tileFound)
-                {
-                    Console.Write(new string(' ', cellSize));
-                }
-
-                Console.Write("|");
+                Console.Write($"({i}) {tiles[i].Side1}|{tiles[i].Side2} ");
             }
             Console.WriteLine();
-            Console.WriteLine(new string('-', (cellSize + 1) * boardSize + 1));
         }
-        Console.WriteLine();
+
+        public static void DrawBoard(IBoard board, List<Tile> tilesHorizontal, List<Tile> tilesVertical)
+        {
+            int cellSize = 5;
+            int boardSize = board.GetBoardSize();
+
+            Console.WriteLine($"Setting board boundary condition: {boardSize}");
+            Console.WriteLine(new string('-', (cellSize + 1) * boardSize + 1));
+
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    Tile matchingTile = FindMatchingTile(tilesHorizontal, j, i) ?? FindMatchingTile(tilesVertical, j, i);
+
+                    if (matchingTile != null)
+                    {
+                        Console.Write(GetTileDisplay(matchingTile));
+                    }
+                    else
+                    {
+                        Console.Write(new string(' ', cellSize));
+                    }
+
+                    Console.Write("|");
+                }
+                Console.WriteLine();
+                Console.WriteLine(new string('-', (cellSize + 1) * boardSize + 1));
+            }
+            Console.WriteLine();
+        }
+
+        private static Tile FindMatchingTile(List<Tile> tiles, int posX, int posY)
+        {
+            foreach (var tile in tiles)
+            {
+                int x = tile.TilePosition?.GetPosX() ?? -1;
+                int y = tile.TilePosition?.GetPosY() ?? -1;
+
+                if (x == posX && y == posY)
+                {
+                    return tile;
+                }
+            }
+            return null;
+        }
+
+        private static string GetTileDisplay(Tile tile)
+        {
+            if (tile.Orientation == TileOrientation.Horizontal)
+            {
+                return $" {tile.Side1}|{tile.Side2} ";
+            }
+            else if (tile.Orientation == TileOrientation.Vertical)
+            {
+                return $" {tile.Side1}/{tile.Side2} ";
+            }
+            return string.Empty;
+        }
     }
 }
-
-

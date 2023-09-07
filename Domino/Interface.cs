@@ -15,5 +15,5 @@ public interface IPlayer
 }
 public interface ITile
 {
-    bool SetTileValue(int sideA, int sideB);
+    bool SetTileValue(int side1, int side2);
 }

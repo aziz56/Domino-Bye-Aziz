@@ -1,140 +1,131 @@
-namespace Domino;
+using System;
+using System.Collections.Generic;
 
-public class GameController
+namespace Domino
 {
-    private Dictionary<IPlayer,ITile>_playerData;
-    private List<IPlayer>_players;
-    private List<ITile>_tiles;
-    private Deck _deck;
-    private IArena _arena;
+    public class GameController
+    {
+        private Dictionary<IPlayer, List<ITile>> _playerData;
+        private List<IPlayer> _players;
+        private Deck _deck;
+        private IArena _arena;
+        private IPlayer? _currentPlayer;
+        private List<Tile> _tileOnBoard;
+        private List<Tile> _verticalTileOnBoard;
 
-    private IPlayer? _currentPlayer;
-    private List<int> _validSideTiles;
-    private List<Tile> _tileOnBoard;
-    private List<Tile> _verticalTileOnBoard;
-
-public GameController()
-{
-    _players = new List<IPlayer>();
-    _deck = new Deck(); 
-    _arena = new Arena();
-    _playerData =new Dictionary<IPlayer, ITile>();
-    _tiles = new List<ITile>();
-}
-// public GameController(Dictionary<IPlayer, ITile> playerdata)
-// {
-//    _players = new List<IPlayer>();
-//    _player
-
-   
-// }
-public bool AddPlayer(IPlayer player)
-{
-    if (player != null)
-    {
-        _players?.Add(player);
-        List<Tile> tilesPlayer = new List<Tile>();
-        _playerData.Add(player, (ITile)tilesPlayer);
-        return true;    
-    }
-    return false;
-}
-public bool AddDeck(Deck deck) 
-{
-    if (_deck != null)
-    {
-     _deck = deck;
-     return true;   
-    }
-    return false;
-}
-public bool AddArena(IArena arena)
-{
-    if (arena != null)
-    {
-        _arena = arena;
-        return true;
-    }
-    return false;
-}
-
-    public List<IPlayer> GetPlayers()
-    {
-        return _players;
-    }
-
-    public List<Tile> GetPlayerTiles(IPlayer player)
-    {
-        return (List<Tile>)_playerData[player];
-    }
-    public IPlayer? GetCurrentPlayer()
-    {
-        return _currentPlayer;
-    }
-    public void SetCurrentPlayer(int index)
-    {
-        _currentPlayer = _players[index];
-    }
-    
-    public void MoveToNextPlayer()
-    {
-        if (_currentPlayer != null)
+        public GameController()
         {
-            int currentPLayerIndex = _players.IndexOf(_currentPlayer);
-            if (currentPLayerIndex >= 0 && currentPLayerIndex < _players.Count - 1)
-            {
-                _currentPlayer = _players[currentPLayerIndex + 1];
-            }
-            else
-            {
-                _currentPlayer = _players[0];
-            }
+            _players = new List<IPlayer>();
+            _playerData = new Dictionary<IPlayer, List<ITile>>();
         }
-    }
-    public IArena GetBoard()
-    {
-        return _arena;
-    }
-    public List<Tile> GetTileOnBoard()
-    {
-        return _tileOnBoard;
-    }
-    public List<Tile> GetTileVerticalOnBoard()
-    {
-        return _verticalTileOnBoard;
-    }
-    public bool GameEndWithZeroTile()
-    {
-        foreach (var playerTile in _playerData.Values)
+
+        public bool AddPlayer(IPlayer player)
         {
-            if (playerTile.Count == 0)
+            if (player != null && !_players.Contains(player))
             {
+                _players.Add(player);
+                _playerData.Add(player, new List<ITile>());
                 return true;
             }
+            return false;
         }
-        return false;
-    }
-    private bool GameEndWithNoSameTiles(int validTile)
-    {
-        bool thisPlayerValidTiles = false;
-        foreach (var playerTile in _playersResource.Values)
+
+        public bool AddDeck(Deck deck)
         {
-            foreach (var tile in playerTile)
+            if (deck != null && _deck == null)
             {
-                if (tile.GetTileSideA() == validTile || tile.GetTileSideB() == validTile)
+                _deck = deck;
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddArena(IArena arena)
+        {
+            if (arena != null && _arena == null)
+            {
+                _arena = arena;
+                return true;
+            }
+            return false;
+        }
+
+        // ... Previous code ...
+
+        public void SetCurrentPlayer(int index)
+        {
+            if (index >= 0 && index < _players.Count)
+            {
+                _currentPlayer = _players[index];
+            }
+        }
+
+        public void MoveToNextPlayer()
+        {
+            if (_currentPlayer != null)
+            {
+                int currentPlayerIndex = _players.IndexOf(_currentPlayer);
+                if (currentPlayerIndex >= 0 && currentPlayerIndex < _players.Count - 1)
                 {
-                    thisPlayerValidTiles = true;
+                    _currentPlayer = _players[currentPlayerIndex + 1];
+                }
+                else
+                {
+                    _currentPlayer = _players[0];
                 }
             }
-            if (thisPlayerValidTiles)
-            {
-                return false;
-            }
         }
-        if (!thisPlayerValidTiles)
+
+        public IArena GetBoard()
         {
-            return true;
+            return _arena;
         }
-        return false;
+
+        public List<Tile> GetTileOnBoard()
+        {
+            return _tileOnBoard;
+        }
+
+        public List<Tile> GetTileVerticalOnBoard()
+        {
+            return _verticalTileOnBoard;
+        }
+
+        public bool GenerateTiles(IPlayer player, int count)
+        {
+            if (_deck.GetTileData() != null && _playerData.TryGetValue(player, out List<ITile> playerTiles))
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    List<int>? tileData = _deck.GetTileData();
+                    if (tileData != null)
+                    {
+                        int a = tileData[0];
+                        int b = tileData[1];
+                        playerTiles.Add(new Tile(a, b));
+                        _deck.RemoveData(tileData);
+                    }
+                    else
+                    {
+                        return false; // Not enough tiles in the deck
+                    }
+                }
+                return true;
+            }
+            return false; // Player or deck not found
+        }
+
+        public bool GameEndWithZeroTile()
+        {
+            foreach (var playerTiles in _playerData.Values)
+            {
+                if (playerTiles.Count == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
+
