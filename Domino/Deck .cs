@@ -3,10 +3,14 @@
     {
         private List<Tile> _tilesDeck = new List<Tile>();
         private int _totalSide;
-        public Deck(int totalSide)
+
+    public Deck()
+    {
+    }
+
+    public Deck(int totalSide)
         {
             _totalSide = totalSide;
-            _tilesDeck = new List<Tile>();
             CreateTiles();
             Shuffle();
         }
@@ -16,7 +20,7 @@
 
             for (int side1 = 0; side1 <= _totalSide; side1++)
             {
-                for (int side2 = side1; side2 <= 6; b++)
+                for (int side2 = side1; side2 <= 6; side2++)
                 {
                     Tile tile = new Tile(side1, side2);
                     
