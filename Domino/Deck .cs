@@ -1,9 +1,13 @@
  namespace Domino;
     public class Deck
     {
-        public List<Tile> _tiles = new List<Tile>();
+        private List<Tile> _tiles = new List<Tile>();
+        private int _totalSide;
+        public Deck(int totalSide)
+        {
 
-        public Deck()
+        }
+        public void CreateTiles()
         {
             HashSet<Tile> uniqueTiles = new HashSet<Tile>();
 
