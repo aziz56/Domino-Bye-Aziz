@@ -126,6 +126,20 @@ namespace Domino
             }
             return false;
         }
+
+        public bool GameEndWithNoSameTiles(int validTile)
+        {
+            foreach (var playerTiles in _playerData.Values)
+            {
+                foreach (var tile in playerTiles)
+                {
+                    if (tile.Side1 == validTile || tile.Side2 == validTile)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }
-

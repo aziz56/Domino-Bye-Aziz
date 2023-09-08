@@ -28,11 +28,11 @@ namespace Domino
 
             HashSet<Tile> uniqueTiles = new HashSet<Tile>();
 
-            for (int side1 = 0; side1 <= _totalSide; side1++)
+            for (int Side1 = 0; Side1 <= _totalSide; Side1++)
             {
-                for (int side2 = side1; side2 <= _totalSide; side2++) // Fixed this line
+                for (int Side2 = Side1; Side2 <= _totalSide; Side2++) // Fixed this line
                 {
-                    Tile tile = new Tile(side1, side2);
+                    Tile tile = new Tile(Side1, Side2);
 
                     if (uniqueTiles.Add(tile))
                     {

@@ -18,12 +18,12 @@ namespace Domino
         public TileOrientation Orientation => _orientation;
         public Position? TilePosition => _positionTile;
 
-        public bool SetTileValue(int side1, int side2)
+        public bool SetTileValue(int Side1, int Side2)
         {
-            if (side1 >= 0 && side2 >= 0)
+            if (Side1 >= 0 && Side2 >= 0)
             {
-                _side1 = side1;
-                _side2 = side2;
+                _side1 = Side1;
+                _side2 = Side2;
                 return true;
             }
             return false;
