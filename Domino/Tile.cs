@@ -4,56 +4,68 @@ namespace Domino
     {
         private int _side1;
         private int _side2;
+
         private TileOrientation _orientation;
-        private Position _positionTile;
-
-        public Tile(int side1, int side2)
+        private Position _positionTile; 
+        public Tile(int Side1, int Side2)
         {
-            SetTileValue(side1, side2);
-            _positionTile = new Position();
+            SetTileValue(Side1, Side2);
+            _positionTile = new();
+
         }
-
-        public int Side1 => _side1;
-        public int Side2 => _side2;
-        public TileOrientation Orientation => _orientation;
-        public Position? TilePosition => _positionTile;
-
+        public int GetTileSide1()
+        {
+            return _side1;
+        }
+        public int GetTileSide2()
+        {
+            return _side2;
+        }
         public bool SetTileValue(int Side1, int Side2)
         {
-            if (Side1 >= 0 && Side2 >= 0)
+            if (Side1 >=0 && Side2 >= 0)
             {
-                _side1 = Side1;
                 _side2 = Side2;
+                _side1 = Side1;
                 return true;
             }
-            return false;
+                return false;
         }
-
-        public void FlipTiles()
-        {
-            _side1 = _side1 - _side2;
-            _side2 = _side1 + _side2;
-            _side1 = _side1 - _side1;
-        }
-
-        public bool SetTileOrientation(TileOrientation orientation)
-        {
-            if (orientation == TileOrientation.horizontal || orientation == TileOrientation.vertical)
-            {
-                _orientation = orientation;
-                return true;
-            }
-            return false;
-        }
-
-        public void SetTilePosition(int x, int y)
-        {
-            _positionTile.SetPosition(x, y);
-        }
-
         public override string ToString()
         {
             return $"({_side1}, {_side2})";
         }
+        public bool FlipTiles()
+    {
+        if (_side1 >= 0 && _side2 >= 0)
+        {
+            _side1 = _side1 - _side2;
+            _side2 = _side1 + _side2;
+            _side1 = _side1 - _side1;
+            return true;
+        }
+        return false;
+    }
+        public bool SetTileOrientation(TileOrientation orientation)
+    {
+        if (TileOrientation.horizontal == orientation || TileOrientation.vertical == orientation)
+        {
+            _orientation = orientation;
+            return true;
+        }
+        return false;
+    }
+    public TileOrientation GetTileOrientation()
+    {
+        return _orientation;
+    }
+    public Position? GetTilePosition()
+    {
+        return _positionTile;
+    }
+    public void SetTilePosition(int x, int y)
+    {
+        _positionTile.SetPosition(x, y);
     }
 }
+    }

@@ -5,18 +5,17 @@ namespace Domino
 {
     public class GameController
     {
-        private Dictionary<IPlayer, List<ITile>> _playerData;
+        private Dictionary<IPlayer, List<Tile>> _playerData;
         private List<IPlayer> _players;
         private Deck _deck;
         private IArena _arena;
         private IPlayer? _currentPlayer;
         private List<Tile> _tileOnBoard;
-        private List<Tile> _verticalTileOnBoard;
 
         public GameController()
         {
             _players = new List<IPlayer>();
-            _playerData = new Dictionary<IPlayer, List<ITile>>();
+            _playerData = new Dictionary<IPlayer, List<Tile>>();
         }
 
         public bool AddPlayer(IPlayer player)
@@ -24,7 +23,7 @@ namespace Domino
             if (player != null && !_players.Contains(player))
             {
                 _players.Add(player);
-                _playerData.Add(player, new List<ITile>());
+                _playerData.Add(player, new List<Tile>());
                 return true;
             }
             return false;
@@ -50,7 +49,6 @@ namespace Domino
             return false;
         }
 
-        // ... Previous code ...
 
         public void SetCurrentPlayer(int index)
         {
@@ -59,8 +57,15 @@ namespace Domino
                 _currentPlayer = _players[index];
             }
         }
-
-        public void MoveToNextPlayer()
+        public bool CheckTileAvailable()
+        {
+            if (_deck.GetTilesDeck()?.Count != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public void Turn()
         {
             if (_currentPlayer != null)
             {
@@ -76,7 +81,7 @@ namespace Domino
             }
         }
 
-        public IArena GetBoard()
+        public IArena GetArena()
         {
             return _arena;
         }
@@ -86,14 +91,11 @@ namespace Domino
             return _tileOnBoard;
         }
 
-        public List<Tile> GetTileVerticalOnBoard()
-        {
-            return _verticalTileOnBoard;
-        }
+
 
         public bool GenerateTiles(IPlayer player, int count)
         {
-            if (_deck.GetTileData() != null && _playerData.TryGetValue(player, out List<ITile> playerTiles))
+            if (_deck.GetTileData() != null && _playerData.TryGetValue(player, out List<Tile> playerTiles))
             {
                 for (int i = 0; i < count; i++)
                 {
@@ -127,19 +129,28 @@ namespace Domino
             return false;
         }
 
-        public bool GameEndWithNoSameTiles(int validTile)
+        private bool GameEndWithNoSameTiles(int validTile)
         {
-            foreach (var playerTiles in _playerData.Values)
+            bool thisPlayerValidTiles = false;
+            foreach (var playerTile in _playerData.Values)
             {
-                foreach (var tile in playerTiles)
+                foreach (var tile in playerTile)
                 {
-                    if (tile.Side1 == validTile || tile.Side2 == validTile)
+                    if (tile.GetTileSide1() == validTile || tile.GetTileSide2() == validTile)
                     {
-                        return false;
+                        thisPlayerValidTiles = true;
                     }
                 }
+                if (thisPlayerValidTiles)
+                {
+                    return false;
+                }
             }
-            return true;
+            if (!thisPlayerValidTiles)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

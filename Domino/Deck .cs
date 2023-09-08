@@ -5,11 +5,12 @@ namespace Domino
 {
     public class Deck
     {
-        private List<Tile> _tilesDeck = new List<Tile>();
+        private List<List<int>> _tilesDeck;
         private int _totalSide;
 
         public Deck(int totalSide)
         {
+            _tilesDeck = new List<List<int>>();
             _totalSide = totalSide;
             CreateTiles();
             Shuffle();
@@ -17,50 +18,48 @@ namespace Domino
 
         public Deck()
         {
-            _totalSide = 6; // Default totalSide if not specified
-            CreateTiles();
-            Shuffle();
+
         }
 
         public void CreateTiles()
         {
-            _tilesDeck.Clear(); // Clear existing tiles before creating new ones
-
-            HashSet<Tile> uniqueTiles = new HashSet<Tile>();
-
             for (int Side1 = 0; Side1 <= _totalSide; Side1++)
             {
-                for (int Side2 = Side1; Side2 <= _totalSide; Side2++) // Fixed this line
+                for (int Side2 = Side1; Side2 <= _totalSide; Side2++)
                 {
-                    Tile tile = new Tile(Side1, Side2);
-
-                    if (uniqueTiles.Add(tile))
-                    {
-                        _tilesDeck.Add(tile);
-                    }
+                    List<int> tiles = new List<int>() { Side1, Side2 };
+                    _tilesDeck.Add(tiles);
                 }
             }
         }
 
-        public void Shuffle()
+        public bool Shuffle()
         {
-            Random rng = new Random();
-            int n = _tilesDeck.Count;
-            while (n > 1)
+            if (_tilesDeck.Count >= 2)
             {
-                n--;
-                int indexRand = rng.Next(n + 1);
-                Tile value = _tilesDeck[indexRand];
-                _tilesDeck[indexRand] = _tilesDeck[n];
-                _tilesDeck[n] = value;
+                Random rng = new Random();
+                int n = _tilesDeck.Count;
+                while (n > 1)
+                {
+                    n--;
+                    int indexRand = rng.Next(n + 1);
+                    List<int> value = _tilesDeck[indexRand];
+                    _tilesDeck[indexRand] = _tilesDeck[n];
+                    _tilesDeck[n] = value;
+                }
+                return true;
             }
+            return false;
         }
-
+        public List<List<int>>? GetTilesDeck()
+        {
+            return _tilesDeck;
+        }
         public List<int>? GetTileData()
         {
             if (_tilesDeck.Count > 0)
             {
-                List<int> data = new List<int> { _tilesDeck[0].Side1, _tilesDeck[0].Side2 }; // Fixed property names
+                List<int> data = _tilesDeck[0];
                 return data;
             }
             else
@@ -73,10 +72,9 @@ namespace Domino
         {
             if (_tilesDeck.Count > 0)
             {
-                Tile tileToRemove = _tilesDeck.Find(tile => tile.Side1 == data[0] && tile.Side2 == data[1]);
-                if (tileToRemove != null)
+                if (_tilesDeck.Contains(data))
                 {
-                    _tilesDeck.Remove(tileToRemove);
+                    _tilesDeck.Remove(data);
                     return true;
                 }
             }
