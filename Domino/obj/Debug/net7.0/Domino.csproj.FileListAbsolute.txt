@@ -1,0 +1,5 @@
+d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\Domino.csproj.AssemblyReference.cache
+d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\Domino.GeneratedMSBuildEditorConfig.editorconfig
+d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\Domino.AssemblyInfoInputs.cache
+d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\Domino.AssemblyInfo.cs
+d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\Domino.csproj.CoreCompileInputs.cache

@@ -3,19 +3,38 @@ using System.Collections.Generic;
 
 namespace Domino
 {
-    public class GameController
+    public partial class GameController
     {
         private Dictionary<IPlayer, List<Tile>> _playerData;
         private List<IPlayer> _players;
         private Deck _deck;
         private IArena _arena;
         private IPlayer? _currentPlayer;
-        private List<Tile> _tileOnBoard;
+        private List<Tile> _tileOnArena;
+        private List<int> _validSideTile;
+        private List<Tile> _verticalTileOnArena;
 
         public GameController()
         {
             _players = new List<IPlayer>();
             _playerData = new Dictionary<IPlayer, List<Tile>>();
+            _arena = new Arena();
+            _deck = new Deck();
+            _currentPlayer = null;
+            _validSideTile = new List<int>();
+            _tileOnArena = new List<Tile>();
+            _verticalTileOnArena = new List<Tile>();
+        }
+        public GameController(IPlayer player, List<Tile> tile)
+        {
+            _players = new List<IPlayer>();
+            _playerData = new Dictionary<IPlayer, List<Tile>>();
+            _playerData.Add(player, tile);
+            _arena = new Arena();
+            _deck = new Deck();
+            _validSideTile = new List<int>();
+            _tileOnArena = new List<Tile>();
+            _verticalTileOnArena = new List<Tile>();
         }
 
         public bool AddPlayer(IPlayer player)
@@ -88,7 +107,7 @@ namespace Domino
 
         public List<Tile> GetTileOnBoard()
         {
-            return _tileOnBoard;
+            return _tileOnArena;
         }
 
 
@@ -131,26 +150,50 @@ namespace Domino
 
         private bool GameEndWithNoSameTiles(int validTile)
         {
-            bool thisPlayerValidTiles = false;
-            foreach (var playerTile in _playerData.Values)
+            foreach (var playerTiles in _playerData.Values)
             {
-                foreach (var tile in playerTile)
+                foreach (var tile in playerTiles)
                 {
                     if (tile.GetTileSide1() == validTile || tile.GetTileSide2() == validTile)
                     {
-                        thisPlayerValidTiles = true;
+                        return false; // At least one player has a tile with the valid side
                     }
                 }
-                if (thisPlayerValidTiles)
+            }
+
+            return true; // No player has a tile with the valid side
+        }
+
+        public bool ValidMove(IPlayer player)
+        {
+            foreach (var thisTile in _playerData[player])
+            {
+                if (_tileOnArena.Count == 0)
                 {
-                    return false;
+                    return true;
+                }
+                else if (thisTile.GetTileSide1() == _validSideTile[0] || thisTile.GetTileSide2() == _validSideTile[0])
+                {
+                    return true;
+                }
+                else if (thisTile.GetTileSide1() == _validSideTile[1] || thisTile.GetTileSide2() == _validSideTile[1])
+                {
+                    return true;
+                }
+                else if (_verticalTileOnArena.Count != 0)
+                {
+                    if (thisTile.GetTileSide1() == _validSideTile[2] || thisTile.GetTileSide2() == _validSideTile[2])
+                    {
+                        return true;
+                    }
+                    if (thisTile.GetTileSide1() == _validSideTile[3] || thisTile.GetTileSide2() == _validSideTile[3])
+                    {
+                        return true;
+                    }
                 }
             }
-            if (!thisPlayerValidTiles)
-            {
-                return true;
-            }
-            return false;
+
+            return false; // No valid move found
         }
     }
 }

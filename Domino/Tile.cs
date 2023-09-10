@@ -6,7 +6,9 @@ namespace Domino
         private int _side2;
 
         private TileOrientation _orientation;
-        private Position _positionTile; 
+        private Position _positionTile;
+
+
         public Tile(int Side1, int Side2)
         {
             SetTileValue(Side1, Side2);

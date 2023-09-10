@@ -10,3 +10,9 @@ public enum GameStatus
     winTheGame,
     loseTheGame
 }
+public enum GameMode
+{
+    blockMode
+
+    drawmode
+}
