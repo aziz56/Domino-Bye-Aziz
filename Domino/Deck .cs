@@ -18,7 +18,7 @@ namespace Domino
 
         public Deck()
         {
-
+            _tilesDeck = new List<List<int>>();
         }
 
         public void CreateTiles()

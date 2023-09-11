@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Domino;
 using DisplayDomino;
-using System.Text.Json.Serialization;
-using System.IO;
-using System.Text.Json;
-using System.Runtime.Serialization.Json;
+
 
 class Program
 {
@@ -50,25 +46,7 @@ class Program
         game1.GenerateTiles(player1, 2);
         game1.GenerateTiles(player2, 2);
         game1.SetGameMode(GameMode.blockmode);
-        Console.WriteLine("Set your game mode : \n1. Draw Mode\n2. Block Mode");
-        int pickGameMode;
-        do
-        {
-            pickGameMode = int.Parse(Console.ReadLine());
-            if (pickGameMode != 1 || pickGameMode != 2)
-            {
-                Console.WriteLine("please enter pick 1 or 2");
-            }
-        } while (pickGameMode != 1 && pickGameMode != 2);
-        if (pickGameMode == 1)
-        {
-            game1.SetGameMode(GameMode.drawmode);
-        }
-        else if (pickGameMode == 2)
-        {
-            game1.SetGameMode(GameMode.blockmode);
-        }
-
+       
         Console.WriteLine("=====Game Start=====");
         game1.SetCurrentPlayer(0);
         while (!game1.IsEnded())
@@ -76,10 +54,6 @@ class Program
             game1.GetPlayerTiles(player1);
             game1.GetPlayerTiles(player2);
             Console.Clear();
-            Console.Write("waiting for validate turn and create board ");
-            Console.Write(":v  ");
-            Console.Write(":v  ");
-            Console.WriteLine(". ");
             Display.DrawBoard(arena, game1.GetTileOnArena(), game1.GetTileVerticalOnArena());
             Console.WriteLine("=========================================");
             Console.WriteLine($"Now is {game1.GetCurrentPlayer().GetName()} Turn");
@@ -190,3 +164,21 @@ class Program
 
     }
 }
+//  Console.WriteLine("Set your game mode : \n1. Draw Mode\n2. Block Mode");
+//         int pickGameMode;
+//         do
+//         {
+//             pickGameMode = int.Parse(Console.ReadLine());
+//             if (pickGameMode != 1 || pickGameMode != 2)
+//             {
+//                 Console.WriteLine("please enter pick 1 or 2");
+//             }
+//         } while (pickGameMode != 1 && pickGameMode != 2);
+//         if (pickGameMode == 1)
+//         {
+//             game1.SetGameMode(GameMode.drawmode);
+//         }
+//         else if (pickGameMode == 2)
+//         {
+//             game1.SetGameMode(GameMode.blockmode);
+//         }

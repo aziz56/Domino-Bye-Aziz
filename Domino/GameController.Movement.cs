@@ -5,7 +5,7 @@ public partial class GameController
 
     public bool MakeMove(Tile tile, int side)
     {
-        List<Tile> currentPlayerTiles = _playerData[_currentPlayer];
+        List<Tile>currentPlayerTiles = _playerData[_currentPlayer];
         if (_verticalTileOnArena.Count == 0)
         {
             ValidateTopAndButtomSide();

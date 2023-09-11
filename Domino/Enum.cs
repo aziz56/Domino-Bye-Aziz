@@ -14,5 +14,4 @@ public enum GameMode
 {
     blockmode,
 
-    drawmode
 }
