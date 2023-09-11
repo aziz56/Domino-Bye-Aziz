@@ -110,7 +110,7 @@ public partial class GameController
                 _validSideTile.Add(tile.GetTileSide1());
                 _validSideTile.Add(tile.GetTileSide2());
             }
-            tile.SetTilePosition(_arena.GetBoardSize() / 2, _arena.GetBoardSize() / 2);
+            tile.SetTilePosition(_arena.GetArenaSize() / 2, _arena.GetArenaSize() / 2);
             _tileOnArena.Add(tile);
             return true;
         }
@@ -171,11 +171,11 @@ public partial class GameController
 
         if (thisTile.GetTileSide1() == _validSideTile[1])
         {
-            if (rightTilePosX < _arena.GetBoardSize() - 1)
+            if (rightTilePosX < _arena.GetArenaSize() - 1)
             {
                 thisTile.SetTilePosition(rightTilePosX + 1, rightTilePosY);
             }
-            else if (rightTilePosX == _arena.GetBoardSize() - 1)
+            else if (rightTilePosX == _arena.GetArenaSize() - 1)
             {
                 thisTile.SetTilePosition(rightTilePosX, rightTilePosY - 1);
             }
@@ -185,11 +185,11 @@ public partial class GameController
         }
         else if (thisTile.GetTileSide2() == _validSideTile[1])
         {
-            if (rightTilePosX < _arena.GetBoardSize() - 1)
+            if (rightTilePosX < _arena.GetArenaSize() - 1)
             {
                 thisTile.SetTilePosition(rightTilePosX + 1, rightTilePosY);
             }
-            else if (rightTilePosX == _arena.GetBoardSize() - 1)
+            else if (rightTilePosX == _arena.GetArenaSize() - 1)
             {
                 thisTile.SetTilePosition(rightTilePosX, rightTilePosY - 1);
             }

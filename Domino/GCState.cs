@@ -15,7 +15,7 @@ public partial class GameController
             gameEnded?.Invoke(this, EventArgs.Empty);
             return true;
         }
-        if (_gameMode == GameMode.blockMode && _validSideTile.Count >= 2)
+        if (_gameMode == GameMode.blockmode && _validSideTile.Count >= 2)
         {
             if (GameEndWithNoSameTiles(_validSideTile[0]) && GameEndWithNoSameTiles(_validSideTile[1]))
             {

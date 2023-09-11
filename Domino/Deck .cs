@@ -51,13 +51,14 @@ namespace Domino
             }
             return false;
         }
+        
         public List<List<int>>? GetTilesDeck()
         {
             return _tilesDeck;
         }
         public List<int>? GetTileData()
         {
-            if (_tilesDeck.Count > 0)
+            if (_tilesDeck?.Count > 0)
             {
                 List<int> data = _tilesDeck[0];
                 return data;

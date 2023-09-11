@@ -4,11 +4,11 @@ namespace Domino;
 public class Arena : IArena
 {
     private int _size;
-    public int GetBoardSize()
+    public int GetArenaSize()
     {
         return _size;
     }
-    public bool SetBoardSize(int size)
+    public bool SetArenaSize(int size)
     {
         if (size > 0)
         {

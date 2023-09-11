@@ -13,49 +13,23 @@ public class Display
         }
         Console.WriteLine();
     }
-    public static void DrawBoard(IArena arena, List<Tile> tilesHorizontal, List<Tile> tilesVertical)
-    {
-        int cellSize = 5;
-        int boardSize = arena.GetBoardSize();
-
-        Console.WriteLine($"Setting board boundary condition: {boardSize}");
-        Console.WriteLine(new string('-', (cellSize + 1) * boardSize + 1));
-
-        for (int i = 0; i < boardSize; i++)
+        public static void DrawBoard(IArena arena, List<Tile> tilesHorizontal, List<Tile> tilesVertical)
         {
-            for (int j = 0; j < boardSize; j++)
+            int cellSize = 5;
+            int boardSize = arena.GetArenaSize();
+
+            for (int i = 0; i < boardSize; i++)
             {
-                bool tileFound = false;
-
-                foreach (var tile in tilesHorizontal)
+                for (int j = 0; j < boardSize; j++)
                 {
-                    int x = tile.GetTilePosition().GetPosX();
-                    int y = tile.GetTilePosition().GetPosY();
+                    bool tileFound = false;
 
-                    if (x == j && y == i)
+                    foreach (var tile in tilesHorizontal)
                     {
-                        tileFound = true;
+                        int x = tile.GetTilePosition().GetPosX();
+                        int y = tile.GetTilePosition().GetPosY();
 
-                        if (tile.GetTileOrientation() == TileOrientation.horizontal)
-                        {
-                            Console.Write($" {tile.GetTileSide1()}|{tile.GetTileSide2()} ");
-                        }
-                        else if (tile.GetTileOrientation() == TileOrientation.vertical)
-                        {
-                            Console.Write($" {tile.GetTileSide1()}/{tile.GetTileSide2()} ");
-                        }
-                        break;
-                    }
-                }
-
-                if (!tileFound)
-                {
-                    foreach (var tile in tilesVertical)
-                    {
-                        int a = tile.GetTilePosition().GetPosX();
-                        int b = tile.GetTilePosition().GetPosY();
-
-                        if (a == j && b == i)
+                        if (x == j && y == i)
                         {
                             tileFound = true;
 
@@ -70,20 +44,38 @@ public class Display
                             break;
                         }
                     }
-                }
 
-                if (!tileFound)
-                {
-                    Console.Write(new string(' ', cellSize));
-                }
+                    if (!tileFound)
+                    {
+                        foreach (var tile in tilesVertical)
+                        {
+                            int a = tile.GetTilePosition().GetPosX();
+                            int b = tile.GetTilePosition().GetPosY();
 
-                Console.Write("|");
+                            if (a == j && b == i)
+                            {
+                                tileFound = true;
+
+                                if (tile.GetTileOrientation() == TileOrientation.horizontal)
+                                {
+                                    Console.Write($" {tile.GetTileSide1()}|{tile.GetTileSide2()} ");
+                                }
+                                else if (tile.GetTileOrientation() == TileOrientation.vertical)
+                                {
+                                    Console.Write($" {tile.GetTileSide1()}/{tile.GetTileSide2()} ");
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!tileFound)
+                    {
+                        Console.Write(new string(' ', cellSize));
+                    }
+                }
+                Console.WriteLine();
             }
             Console.WriteLine();
-            Console.WriteLine(new string('-', (cellSize + 1) * boardSize + 1));
         }
-        Console.WriteLine();
     }
-}
-
-

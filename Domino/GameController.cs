@@ -13,7 +13,7 @@ namespace Domino
         private List<Tile> _tileOnArena;
         private List<int> _validSideTile;
         private List<Tile> _verticalTileOnArena;
-
+        private GameMode _gameMode;
         public GameController()
         {
             _players = new List<IPlayer>();
@@ -24,6 +24,7 @@ namespace Domino
             _validSideTile = new List<int>();
             _tileOnArena = new List<Tile>();
             _verticalTileOnArena = new List<Tile>();
+            _gameMode = GameMode.drawmode;
         }
         public GameController(IPlayer player, List<Tile> tile)
         {
@@ -68,7 +69,10 @@ namespace Domino
             return false;
         }
 
-
+        public IPlayer? GetCurrentPlayer()
+        {
+        return _currentPlayer;
+         }
         public void SetCurrentPlayer(int index)
         {
             if (index >= 0 && index < _players.Count)
@@ -105,16 +109,31 @@ namespace Domino
             return _arena;
         }
 
-        public List<Tile> GetTileOnBoard()
+        public List<Tile> GetTileOnArena()
         {
             return _tileOnArena;
         }
-
+         public List<Tile> GetTileVerticalOnArena()
+    {
+        return _verticalTileOnArena;
+    }
+        public List<Tile> GetPlayerTiles(IPlayer player)
+        {
+        return _playerData[player];
+        }
+        public void SetGameMode(GameMode gameMode)
+        {
+        _gameMode = gameMode;
+        }
+        public GameMode GetGameMode()
+        {
+        return _gameMode;
+        }
 
 
         public bool GenerateTiles(IPlayer player, int count)
         {
-            if (_deck.GetTileData() != null && _playerData.TryGetValue(player, out List<Tile> playerTiles))
+            if (_deck.GetTileData() != null && _playerData.TryGetValue(player, out List<Tile>playerTiles))
             {
                 for (int i = 0; i < count; i++)
                 {

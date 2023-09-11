@@ -3,8 +3,8 @@ namespace Domino;
 
 public interface IArena
 {
-    public int GetBoardSize();
-    public bool SetBoardSize(int size);
+    public int GetArenaSize();
+    public bool SetArenaSize(int size);
 }
 public interface IPlayer
 {
