@@ -98,8 +98,8 @@ public partial class GameController
             {
                 for (int i = 0; i < count; i++)
                 { 
-                    Tile tileData = _deck.GetTileData();
                     List<Tile>tiles = new();
+                    Tile tileData = _deck.GetTileData();
                     if (tileData != null)
                     {
                         int a = tileData.GetTileSide1();
