@@ -94,7 +94,7 @@ public partial class GameController
      // public bool GenerateTiles(IPlayer player, int count)
        public bool GenerateTiles(IPlayer player, int count)
         {
-            if (_deck.GetTileData().Count >= count && _playerData != null)
+            if (_deck.GetTilesDeck().Count >= count && _playerData != null)
             {
                 for (int i = 0; i < count; i++)
                 { 
