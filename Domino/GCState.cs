@@ -1,8 +1,8 @@
 namespace Domino;
-public delegate void GameEndedEventHandler(object sender, EventArgs e);
+public delegate void GameEnded(object sender, EventArgs e);
 public partial class GameController
 {
-    public event GameEndedEventHandler? gameEnded;
+    public event GameEnded? gameEnded;
     public bool IsEnded()
     {
                 if (_arena == null || _players == null || _playerData == null)
@@ -15,13 +15,13 @@ public partial class GameController
             gameEnded?.Invoke(this, EventArgs.Empty);
             return true;
         }
-        if (_gameMode == GameMode.blockmode && _validSideTile.Count >= 2)
+        if (_gameMode == GameMode.blockmode && _validSideTiles.Count >= 2)
         {
-            if (GameEndWithNoSameTiles(_validSideTile[0]) && GameEndWithNoSameTiles(_validSideTile[1]))
+            if (GameEndWithNoSameTiles(_validSideTiles[0]) && GameEndWithNoSameTiles(_validSideTiles[1]))
             {
                 if (_verticalTileOnArena.Count != 0)
                 {
-                    if (GameEndWithNoSameTiles(_validSideTile[2]) && GameEndWithNoSameTiles(_validSideTile[3]))
+                    if (GameEndWithNoSameTiles(_validSideTiles[2]) && GameEndWithNoSameTiles(_validSideTiles[3]))
                     {
                         return true;
                     }
@@ -33,14 +33,14 @@ public partial class GameController
                 }
             }
         }
-        if (_deck.GetTilesDeck()?.Count == 0 && _validSideTile.Count >= 2)
+        if (_deck.GetTilesDeck()?.Count == 0 && _validSideTiles.Count >= 2)
         {
-            if (GameEndWithNoSameTiles(_validSideTile[0]) && GameEndWithNoSameTiles(_validSideTile[1]))
+            if (GameEndWithNoSameTiles(_validSideTiles[0]) && GameEndWithNoSameTiles(_validSideTiles[1]))
             {
                 if (_verticalTileOnArena.Count != 0)
                 {
              
-                    if (GameEndWithNoSameTiles(_validSideTile[2]) && GameEndWithNoSameTiles(_validSideTile[3]))
+                    if (GameEndWithNoSameTiles(_validSideTiles[2]) && GameEndWithNoSameTiles(_validSideTiles[3]))
                     {
                         gameEnded?.Invoke(this, EventArgs.Empty);
                         return true;

@@ -1,16 +1,92 @@
-using System;
-using System.Collections.Generic;
+// using System.Collections.Generic;
+// namespace Domino;
+
+// public class Deck
+// {
+//     private List<List<int>>? _tilesOnDeck;
+//     private int _totalSide;
+
+//     public Deck(int totalSide)
+//     {
+//         _tilesOnDeck = new List<List<int>>();
+//         _totalSide = totalSide;
+//         CreateDominoTiles();
+//         ShuffleTiles();
+//     }
+//     public Deck()
+//     {
+
+//     }
+//     protected void CreateDominoTiles()
+//     {
+//         for (int sideA = 0; sideA <= _totalSide; sideA++)
+//         {
+//             for (int sideB = sideA; sideB <= _totalSide; sideB++)
+//             {
+//                 List<int> tile = new List<int> { sideB, sideA };
+//                 _tilesOnDeck?.Add(tile);
+//             }
+//         }
+//     }
+//     public bool ShuffleTiles()
+//     {
+//         if (_tilesOnDeck?.Count >= 2)
+//         {
+//             Random rondom = new Random();
+//             int n = _tilesOnDeck.Count;
+//             while (n > 1)
+//             {
+//                 n--;
+//                 int randomIndex = rondom.Next(n + 1);
+//                 List<int> value = _tilesOnDeck[randomIndex];
+//                 _tilesOnDeck[randomIndex] = _tilesOnDeck[n];
+//                 _tilesOnDeck[n] = value;
+//             }
+//             return true;
+//         }
+//         return false;
+//     }
+//     public List<List<int>>? GetTilesDeck()
+//     {
+//         return _tilesOnDeck;
+//     }
+//     public List<int>? GetTileData()
+//     {
+//         if (_tilesOnDeck?.Count > 0)
+//         {
+//             List<int> data = _tilesOnDeck[0];
+//             return data;
+//         }
+//         else
+//         {
+//             return null;
+//         }
+//     }
+//     public bool RemoveData(List<int> data)
+//     {
+//         if (_tilesOnDeck != null)
+//         {
+//             _tilesOnDeck.Remove(data);
+//             return false;
+//         }
+//         return false;
+//     }
+
+// }
+// using System;
+// using System.Collections.Generic;
 
 namespace Domino
 {
     public class Deck
     {
-        private List<List<int>> _tilesDeck;
+        private List<Tile> _tilesDeck;
         private int _totalSide;
+        
 
         public Deck(int totalSide)
         {
-            _tilesDeck = new List<List<int>>();
+            _tilesDeck = new List<Tile>();
             _totalSide = totalSide;
             CreateTiles();
             Shuffle();
@@ -18,7 +94,7 @@ namespace Domino
 
         public Deck()
         {
-            _tilesDeck = new List<List<int>>();
+            _tilesDeck = new List<Tile>();
         }
 
         public void CreateTiles()
@@ -27,8 +103,8 @@ namespace Domino
             {
                 for (int Side2 = Side1; Side2 <= _totalSide; Side2++)
                 {
-                    List<int> tiles = new List<int>() { Side1, Side2 };
-                    _tilesDeck.Add(tiles);
+                    Tile _tile = new Tile(Side1,Side2);
+                    _tilesDeck.Add(_tile);
                 }
             }
         }
@@ -43,7 +119,7 @@ namespace Domino
                 {
                     n--;
                     int indexRand = rng.Next(n + 1);
-                    List<int> value = _tilesDeck[indexRand];
+                    Tile value = _tilesDeck[indexRand];
                     _tilesDeck[indexRand] = _tilesDeck[n];
                     _tilesDeck[n] = value;
                 }
@@ -52,16 +128,16 @@ namespace Domino
             return false;
         }
         
-        public List<List<int>>? GetTilesDeck()
+        public List<Tile>? GetTilesDeck()
         {
             return _tilesDeck;
         }
-        public List<int>? GetTileData()
+        public Tile GetTileData()
         {
             if (_tilesDeck?.Count > 0)
             {
-                List<int> data = _tilesDeck[0];
-                return data;
+                Tile data = _tilesDeck[0];
+                return data ;
             }
             else
             {
@@ -69,7 +145,7 @@ namespace Domino
             }
         }
 
-        public bool RemoveData(List<int> data)
+        public bool RemoveData(Tile data)
         {
             if (_tilesDeck.Count > 0)
             {

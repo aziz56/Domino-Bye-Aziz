@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
-//namespace Domino;
+       
+namespace Domino;
 
 public partial class GameController
 {
@@ -92,29 +91,32 @@ public partial class GameController
     /// <param name="player">target generate tile to they hand</param>
     /// <param name="count">total tile will player pick</param>
     /// <returns></returns>
-    public bool GenerateTiles(IPlayer player, int count)
-    {
-        if (_deck.GetTilesDeck()?.Count >= count && _playerData != null)
+     // public bool GenerateTiles(IPlayer player, int count)
+       public bool GenerateTiles(IPlayer player, int count)
         {
-            for (int i = 0; i < count; i++)
+            if (_deck.GetTileData().Count >= count && _playerData != null)
             {
-                foreach (var Player in _playerData.Keys)
-                {   Tile tiledata = _deck.GetTileData();
-                    if (player == Player && count != 0)
+                for (int i = 0; i < count; i++)
+                { 
+                    Tile tileData = _deck.GetTileData();
+                    List<Tile>tiles = new();
+                    if (tileData != null)
                     {
-                        
-                        List<int>? tileData = _deck.GetTileData();
-                        int a = tileData[0];
-                        int b = tileData[1];
-                        _playerData[player].Add(new Tile(a, b));
+                        int a = tileData.GetTileSide1();
+                        int b = tileData.GetTileSide2();
+                        tiles.Add(new Tile(a, b));
+                        _playerData[player].Add(tileData);
                         _deck.RemoveData(tileData);
                     }
+                    else
+                    {
+                        return false; // Not enough tiles in the deck
+                    }
                 }
+                return true;
             }
-            return true;
-        }
-        return false;
-    }
+            return false; // Player or deck not found       
+            }
     public bool CheckBoneyardAvailable()
     {
         if (_deck.GetTilesDeck()?.Count != 0)
