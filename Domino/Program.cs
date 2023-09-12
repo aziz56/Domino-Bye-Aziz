@@ -1,60 +1,81 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using Domino;
 using DisplayDomino;
-
 
 class Program
 {
     [Obsolete]
     public static void Main()
     {
-       
 
-        GameController game1 = new();
+        GameController game1 = new GameController();
 
         game1.gameEnded += handleGameEnded;
         game1.gameEnded += PlayerWin;
         game1.gameEnded += PlayerLose;
 
         IPlayer player1 = new Player();
-        Console.WriteLine("Enter ID for player1:");
-        int id1 = int.Parse(Console.ReadLine());
-        player1.SetID(id1);
-
-        Console.WriteLine("Enter name for player1:");
-        string name1 = Console.ReadLine();
-        player1.SetName(name1);
+        player1.SetID(912);
+        player1.SetName("syahrul");
 
         IPlayer player2 = new Player();
-        Console.WriteLine("Enter ID for player2:");
-        int id2 = int.Parse(Console.ReadLine());
-        player2.SetID(id2);
+        player2.SetID(811);
+        player2.SetName("benzema");
 
-        Console.WriteLine("Enter name for player2:");
-        string name2 = Console.ReadLine();
-        player2.SetName(name2);
+        IPlayer player3 = new Player();
+        player3.SetID(411);
+        player3.SetName("mesut");
 
-        Deck deck = new Deck(6);
+        Deck deck= new Deck(6);
         IArena arena = new Arena();
         arena.SetArenaSize(12);
 
-        game1.AddDeck(deck);
+        game1.AddArena(arena);
         game1.AddDeck(deck);
         game1.AddPlayer(player1);
         game1.AddPlayer(player2);
+        game1.AddPlayer(player3);
 
         game1.GenerateTiles(player1, 2);
         game1.GenerateTiles(player2, 2);
-        game1.SetGameMode(GameMode.blockmode);
-       
+        game1.GenerateTiles(player3, 2);
+        Console.WriteLine("Set your game mode : \n1. Draw Mode\n2. Block Mode");
+        int pickGameMode;
+        do
+        {
+            pickGameMode = int.Parse(Console.ReadLine());
+            if (pickGameMode != 1 || pickGameMode != 2)
+            {
+                Console.WriteLine("please enter pick 1 or 2");
+            }
+        } while (pickGameMode != 1 && pickGameMode != 2);
+        if (pickGameMode == 1)
+        {
+            game1.SetGameMode(GameMode.drawmode);
+        }
+        else if (pickGameMode == 2)
+        {
+            game1.SetGameMode(GameMode.blockmode);
+        }
+
         Console.WriteLine("=====Game Start=====");
         game1.SetCurrentPlayer(0);
         while (!game1.IsEnded())
         {
             game1.GetPlayerTiles(player1);
             game1.GetPlayerTiles(player2);
+            game1.GetPlayerTiles(player3);
             Console.Clear();
-            Display.DrawBoard(arena, game1.GetTileOnArena(), game1.GetTileVerticalOnArena());
+            Console.Write("waiting for validate turn and create board ");
+            Task.Delay(1000);
+            Console.Write(". ");
+            Task.Delay(1000);
+            Console.Write(". ");
+            Task.Delay(1000);
+            Console.WriteLine(". ");
+            Display.DrawBoard(arena, game1.GetTileOnBoard(), game1.GetTileVerticalOnArena());
             Console.WriteLine("=========================================");
             Console.WriteLine($"Now is {game1.GetCurrentPlayer().GetName()} Turn");
             Console.WriteLine("=========================================\n");
@@ -85,17 +106,17 @@ class Program
             else if (game1.ValidMove(game1.GetCurrentPlayer()))
             {
                 Console.Write("Enter the tile by index (from 0) to place your tile on board : ");
-                int setTilesOnArena;
+                int setTilesOnBoard;
                 do
                 {
-                    setTilesOnArena = int.Parse(Console.ReadLine());
-                    if (setTilesOnArena < 0 || setTilesOnArena >= game1.GetPlayerTiles(game1.GetCurrentPlayer()).Count)
+                    setTilesOnBoard = int.Parse(Console.ReadLine());
+                    if (setTilesOnBoard < 0 || setTilesOnBoard >= game1.GetPlayerTiles(game1.GetCurrentPlayer()).Count)
                     {
                         Console.WriteLine("invalid index, please input valid index");
                     }
 
                 }
-                while (setTilesOnArena < 0 || setTilesOnArena >= game1.GetPlayerTiles(game1.GetCurrentPlayer()).Count);
+                while (setTilesOnBoard < 0 || setTilesOnBoard >= game1.GetPlayerTiles(game1.GetCurrentPlayer()).Count);
 
                 Console.WriteLine("Choose placement direction:");
                 Console.WriteLine("1. Left");
@@ -105,7 +126,7 @@ class Program
                 Console.Write("Enter your choice: ");
                 int placementChoice = int.Parse(Console.ReadLine());
 
-                Tile selectedTile = game1.GetPlayerTiles(game1.GetCurrentPlayer())[setTilesOnArena];
+                Tile selectedTile = game1.GetPlayerTiles(game1.GetCurrentPlayer())[setTilesOnBoard];
                 if (placementChoice == 1)
                 {
                     game1.MakeMove(selectedTile, 1);
@@ -134,6 +155,16 @@ class Program
                 Console.ReadKey();
             }
         }
+        /// <summary>
+        /// adding leaderboard history to json file
+        /// </summary>
+        /// <returns></returns>
+        //still exception with keyvaluepair connot serialize
+        // var leaderBoard = new DataContractJsonSerializer(typeof(List<KeyValuePair<IPlayer, int>>));
+        // using (FileStream stream = new FileStream("History.json", FileMode.OpenOrCreate))
+        // {
+        //     leaderBoard.WriteObject(stream, game1.GetLeaderBoard());
+        // }
 
         void handleGameEnded(object? sender, EventArgs e)
         {
@@ -164,21 +195,3 @@ class Program
 
     }
 }
-//  Console.WriteLine("Set your game mode : \n1. Draw Mode\n2. Block Mode");
-//         int pickGameMode;
-//         do
-//         {
-//             pickGameMode = int.Parse(Console.ReadLine());
-//             if (pickGameMode != 1 || pickGameMode != 2)
-//             {
-//                 Console.WriteLine("please enter pick 1 or 2");
-//             }
-//         } while (pickGameMode != 1 && pickGameMode != 2);
-//         if (pickGameMode == 1)
-//         {
-//             game1.SetGameMode(GameMode.drawmode);
-//         }
-//         else if (pickGameMode == 2)
-//         {
-//             game1.SetGameMode(GameMode.blockmode);
-//         }

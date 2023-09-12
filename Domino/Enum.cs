@@ -13,5 +13,5 @@ public enum GameStatus
 public enum GameMode
 {
     blockmode,
-
+    drawmode
 }
