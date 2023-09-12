@@ -172,7 +172,7 @@ public partial class GameController
     {
         return _verticalTileOnArena;
     }
-    public bool GameEndWithZeroTile()////
+    public bool GameEndWithZeroTile()
     {
         foreach (var playerTile in _playerData.Values)
         {
