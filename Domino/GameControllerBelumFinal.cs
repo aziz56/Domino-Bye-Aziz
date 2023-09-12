@@ -93,18 +93,18 @@ public partial class GameController
     /// <returns></returns>
      // public bool GenerateTiles(IPlayer player, int count)
        public bool GenerateTiles(IPlayer player, int count)
-        {
-            if (_deck.GetTileData().Count >= count && _playerData != null)
-            {
+        { 
+            if (_deck.GetTilesDeck().Count >= count && _playerData != null)
+            {   
                 for (int i = 0; i < count; i++)
                 { 
                     Tile tileData = _deck.GetTileData();
-                    List<Tile>tiles = new();
+                    List<Tile> tilesPlayer = new();
                     if (tileData != null)
                     {
                         int a = tileData.GetTileSide1();
                         int b = tileData.GetTileSide2();
-                        tiles.Add(new Tile(a, b));
+                        tilesPlayer.Add(new Tile(a, b));
                         _playerData[player].Add(tileData);
                         _deck.RemoveData(tileData);
                     }
