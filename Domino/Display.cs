@@ -8,8 +8,9 @@ public class Display
         int tileIndex = 0;
         for (int i = 0; i < tiles.Count; i++)
         {
-            Console.Write($"({i}) {tiles[tileIndex].GetTileSide1()}|{tiles[tileIndex].GetTileSide2()} ");
-            tileIndex++;
+            Console.WriteLine("   ----- ");
+            Console.Write($"({i})|{tiles[tileIndex].GetTileSide1()}|{tiles[tileIndex].GetTileSide2()}|");tileIndex++;
+            Console.WriteLine("____");
         }
         Console.WriteLine();
     }
@@ -19,7 +20,7 @@ public class Display
         int arenaSize = arena.GetArenaSize();
 
         Console.WriteLine($"Setting board boundary condition: {arenaSize}");
-        Console.WriteLine(new string('-', (cellSize + 1) * arenaSize + 1));
+        Console.WriteLine(new string(' ', (cellSize + 1) * arenaSize + 1));
 
         for (int i = 0; i < arenaSize; i++)
         {
@@ -80,7 +81,7 @@ public class Display
                 Console.Write("|");
             }
             Console.WriteLine();
-            Console.WriteLine(new string('-', (cellSize + 1) * arenaSize + 1));
+            Console.WriteLine(new string(' ', (cellSize + 1) * arenaSize + 1));
         }
         Console.WriteLine();
     }
