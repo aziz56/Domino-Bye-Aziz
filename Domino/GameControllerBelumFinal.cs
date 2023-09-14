@@ -1,4 +1,4 @@
-       
+
 namespace Domino;
 
 public partial class GameController
@@ -35,7 +35,6 @@ public partial class GameController
         _playerData = new Dictionary<IPlayer, List<Tile>>();
         _playerData.Add(player, tile);
         _arena = new Arena();
-        _arena = new Arena();
         _gameMode = GameMode.drawmode;
         _validSideTiles = new List<int>();
         _tileOnArena = new List<Tile>();
@@ -57,7 +56,6 @@ public partial class GameController
             return true;
         }
         return false;
-
     }
     public bool AddDeck(Deck deck)
     {
@@ -91,32 +89,30 @@ public partial class GameController
     /// <param name="player">target generate tile to they hand</param>
     /// <param name="count">total tile will player pick</param>
     /// <returns></returns>
-     // public bool GenerateTiles(IPlayer player, int count)
-       public bool GenerateTiles(IPlayer player, int count)
+    // public bool GenerateTiles(IPlayer player, int count)
+    public bool GenerateTiles(IPlayer player, int count)
+    {
+        if (_deck.GetTilesDeck().Count >= count && _playerData != null)
         {
-            if (_deck.GetTilesDeck().Count >= count && _playerData != null)
+            for (int i = 0; i < count; i++)
             {
-                for (int i = 0; i < count; i++)
-                { 
-                    List<Tile>tiles = new();
-                    Tile tileData = _deck.GetTileData();
-                    if (tileData != null)
-                    {
-                        int a = tileData.GetTileSide1();
-                        int b = tileData.GetTileSide2();
-                        tiles.Add(new Tile(a, b));
-                        _playerData[player].Add(tileData);
-                        _deck.RemoveData(tileData);
-                    }
-                    else
-                    {
-                        return false; // Not enough tiles in the deck
-                    }
+                Tile tileData = _deck.GetTileData();
+                if (tileData != null)
+                {
+                    int a = tileData.GetTileSide1();
+                    int b = tileData.GetTileSide2();
+                    _playerData[player].Add(tileData);
+                    _deck.RemoveData(tileData);
                 }
-                return true;
+                else
+                {
+                    return false; // Not enough tiles in the deck
+                }
             }
-            return false; // Player or deck not found       
-            }
+            return true;
+        }
+        return false; // Player or deck not found       
+    }
     public bool CheckBoneyardAvailable()
     {
         if (_deck.GetTilesDeck()?.Count != 0)
@@ -219,34 +215,27 @@ public partial class GameController
     /// <returns>false if all tile did't have valid number with valid side</returns>
     public bool ValidMove(IPlayer player)
     {
-        //logger.Info("game checking player tile to for they move");
-        foreach (var thisTile in _playerData[player])
+
+        if (_tileOnArena.Count == 0)
         {
-            if (_tileOnArena.Count == 0)
+            return true;
+        }
+
+        int leftValue = _validSideTiles[0];
+        int rightValue = _validSideTiles[1];
+        int topValue = _verticalTileOnArena.Count > 0 ? _validSideTiles[3] : -1;
+        int bottomValue = _verticalTileOnArena.Count > 0 ? _validSideTiles[2] : -1;
+        foreach (var tile in _playerData[player])
+        {
+            int side1 = tile.GetTileSide1();
+            int side2 = tile.GetTileSide2();
+            if (side1 == leftValue || side1 == rightValue || side1 == topValue || side1 == bottomValue ||
+                side2 == leftValue || side2 == rightValue || side2 == topValue || side2 == bottomValue)
             {
                 return true;
-            }
-            else if (thisTile.GetTileSide1() == _validSideTiles[0] || thisTile.GetTileSide2() == _validSideTiles[0])
-            {
-                return true;
-            }
-            else if (thisTile.GetTileSide2() == _validSideTiles[1] || thisTile.GetTileSide2() == _validSideTiles[1])
-            {
-                return true;
-            }
-            else if (_verticalTileOnArena.Count != 0)
-            {
-                if (thisTile.GetTileSide1() == _validSideTiles[2] || thisTile.GetTileSide2() == _validSideTiles[2])
-                {
-                    return true;
-                }
-                if (thisTile.GetTileSide1() == _validSideTiles[3] || thisTile.GetTileSide2() == _validSideTiles[3])
-                {
-                    return true;
-                }
             }
         }
-        // logger.Info("player did't have valid tile for move");
         return false;
+
     }
 }

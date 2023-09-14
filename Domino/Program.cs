@@ -11,22 +11,30 @@ class Program
     {
 
         GameController game1 = new GameController();
+      
 
         game1.gameEnded += handleGameEnded;
         game1.gameEnded += PlayerWin;
         game1.gameEnded += PlayerLose;
 
         IPlayer player1 = new Player();
-        player1.SetID(912);
-        player1.SetName("syahrul");
+        Console.WriteLine("Enter Player 1 ID:");
+        int id1 = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter Player 1 Name:");
+        string name1 = Console.ReadLine();
+
+        player1.SetID(id1);
+        player1.SetName(name1);
 
         IPlayer player2 = new Player();
-        player2.SetID(811);
-        player2.SetName("benzema");
+        Console.WriteLine("Enter Player 2 ID:");
+        int id2 = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter Player 2 Name:");
+        string name2 = Console.ReadLine();
 
-        IPlayer player3 = new Player();
-        player3.SetID(411);
-        player3.SetName("mesut");
+        player2.SetID(id2);
+        player2.SetName(name2);
+
 
         Deck deck= new Deck(6);
         IArena arena = new Arena();
@@ -36,44 +44,25 @@ class Program
         game1.AddDeck(deck);
         game1.AddPlayer(player1);
         game1.AddPlayer(player2);
-        game1.AddPlayer(player3);
 
-        game1.GenerateTiles(player1, 2);
-        game1.GenerateTiles(player2, 2);
-        game1.GenerateTiles(player3, 2);
-        Console.WriteLine("Set your game mode : \n1. Draw Mode\n2. Block Mode");
-        int pickGameMode;
-        do
-        {
-            pickGameMode = int.Parse(Console.ReadLine());
-            if (pickGameMode != 1 || pickGameMode != 2)
-            {
-                Console.WriteLine("please enter pick 1 or 2");
-            }
-        } while (pickGameMode != 1 && pickGameMode != 2);
-        if (pickGameMode == 1)
-        {
-            game1.SetGameMode(GameMode.drawmode);
-        }
-        else if (pickGameMode == 2)
-        {
-            game1.SetGameMode(GameMode.blockmode);
-        }
 
+        game1.GenerateTiles(player1, 10);
+        game1.GenerateTiles(player2, 10);
+    
+        game1.SetGameMode(GameMode.blockmode);
         Console.WriteLine("=====Game Start=====");
         game1.SetCurrentPlayer(0);
         while (!game1.IsEnded())
         {
             game1.GetPlayerTiles(player1);
             game1.GetPlayerTiles(player2);
-            game1.GetPlayerTiles(player3);
             Console.Clear();
             Console.Write("waiting for validate turn and create board ");
-            Task.Delay(1000);
+            //Task.Delay(1000);
             Console.Write(". ");
-            Task.Delay(1000);
+            //Task.Delay(1000);
             Console.Write(". ");
-            Task.Delay(1000);
+            //Task.Delay(1000);
             Console.WriteLine(". ");
             Display.DrawBoard(arena, game1.GetTileOnBoard(), game1.GetTileVerticalOnArena());
             Console.WriteLine("=========================================");

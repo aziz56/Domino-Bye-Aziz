@@ -142,7 +142,7 @@ public partial class GameController
             else if (leftTilePosX == 1)
             {
                 thisTile.SetTilePosition(leftTilePosX, leftTilePosY + 1);
-            }
+                }
             _validSideTiles[0] = thisTile.GetTileSide2();
             thisTile.FlipTiles();
             _tileOnArena.Insert(0, thisTile);
@@ -223,51 +223,50 @@ public partial class GameController
         }
         return false;
     }
-    private bool TopValidSide(Tile thisTile)
-    {
-        int TopTilePosX = _verticalTileOnArena[0].GetTilePosition().GetPosX();
-        int TopTilePosY = _verticalTileOnArena[^1].GetTilePosition().GetPosY();
+private bool TopValidSide(Tile thisTile)
+{
+    int TopTilePosX = _verticalTileOnArena[0].GetTilePosition().GetPosX();
+    int TopTilePosY = _verticalTileOnArena[^1].GetTilePosition().GetPosY();
 
-        if (thisTile.GetTileSide1() == _validSideTiles[3])
-        {
-            thisTile.SetTilePosition(TopTilePosX, TopTilePosY - 1);
-            _validSideTiles[3] = thisTile.GetTileSide2();
-           
-            _verticalTileOnArena.Add(thisTile);
-            return true;
-        }
-        else if (thisTile.GetTileSide1() == _validSideTiles[3])
-        {
-            thisTile.SetTilePosition(TopTilePosX, TopTilePosY - 1);
-            _validSideTiles[3] = thisTile.GetTileSide1();
-            _verticalTileOnArena.Add(thisTile);
-            return true;
-        }
-        return false;
-    }
-    private bool BottomValidSide(Tile thisTile)
+    if (thisTile.GetTileSide1() == _validSideTiles[3])
     {
-        int buttomTilePosX = _verticalTileOnArena[0].GetTilePosition().GetPosX();
-        int buttomTilePosY = _verticalTileOnArena[0].GetTilePosition().GetPosY();
-        if (thisTile.GetTileSide1() == _validSideTiles[2])
-        {
-            thisTile.SetTilePosition(buttomTilePosX, buttomTilePosY + 1);
-            _validSideTiles[2] = thisTile.GetTileSide2();
-            _verticalTileOnArena.Insert(0, thisTile);
-            return true;
-        }
-        else if (thisTile.GetTileSide1() == _validSideTiles[2])
-        {
-            thisTile.SetTilePosition(buttomTilePosX, buttomTilePosY + 1);
-            _validSideTiles[2] = thisTile.GetTileSide1();
-            
-            _verticalTileOnArena.Insert(0, thisTile);
-            return true;
-        }
-        return false;
+        thisTile.SetTilePosition(TopTilePosX, TopTilePosY - 1);
+        _validSideTiles[3] = thisTile.GetTileSide2();
+        _verticalTileOnArena.Add(thisTile);
+        return true;
     }
-
+    else if (thisTile.GetTileSide2() == _validSideTiles[3]) // Corrected condition here
+    {
+        thisTile.SetTilePosition(TopTilePosX, TopTilePosY - 1);
+        _validSideTiles[3] = thisTile.GetTileSide2();
+        _verticalTileOnArena.Add(thisTile);
+        return true;
+    }
+    return false;
 }
+
+private bool BottomValidSide(Tile thisTile)
+{
+    int buttomTilePosX = _verticalTileOnArena[0].GetTilePosition().GetPosX();
+    int buttomTilePosY = _verticalTileOnArena[0].GetTilePosition().GetPosY();
+    
+    if (thisTile.GetTileSide1() == _validSideTiles[2])
+    {
+        thisTile.SetTilePosition(buttomTilePosX, buttomTilePosY + 1);
+        _validSideTiles[2] = thisTile.GetTileSide2();
+        _verticalTileOnArena.Insert(0, thisTile);
+        return true;
+    }
+    else if (thisTile.GetTileSide2() == _validSideTiles[2]) // Corrected condition here
+    {
+        thisTile.SetTilePosition(buttomTilePosX, buttomTilePosY + 1);
+        _validSideTiles[2] = thisTile.GetTileSide2();
+        _verticalTileOnArena.Insert(0, thisTile);
+        return true;
+    }
+    return false;
+}}
+
         
     // thisTile.FlipTiles();
      // thisTile.FlipTiles();

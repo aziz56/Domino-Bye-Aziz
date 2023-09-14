@@ -72,7 +72,7 @@ public partial class GameController
     {
         if (_playerData.TryGetValue(player, out List<Tile>? playerTiles))
         {
-            int count = playerTiles.Sum(tile => tile.GetTileSide1() + tile.GetTileSide2());
+            int count = playerTiles.Count;
             return count;
         }
         return 0;

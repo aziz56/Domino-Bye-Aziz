@@ -10,7 +10,7 @@ public interface IPlayer
 {
     bool SetName(string? name);
     bool SetID(int id);
-    string? GetName();
+    string GetName();
     int GetID();
 }
 public interface ITile
