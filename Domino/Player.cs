@@ -10,7 +10,8 @@ public class Player : IPlayer
 
     public bool SetName(string? name)
     {
-        if(name == null){
+        if (name == null)
+        {
             return false;
         }
         _name = name;
@@ -21,8 +22,10 @@ public class Player : IPlayer
         _id = id;
         return true;
     }
-    public string GetName(){
-        if (_name != null){
+    public string GetName()
+    {
+        if (_name != null)
+        {
             return _name;
         }
         else
@@ -30,9 +33,19 @@ public class Player : IPlayer
             throw new Exception("Nama Belum di Set");
         }
     }
-    public int GetID(){
-        return _id;
+    public int GetID()
+    {
+        if (_id != null)
+        {
+            return _id;
+        }
+        else
+        {
+            throw new Exception ("ID Belum di Set");
+        }
     } 
+
 }
+
 
 

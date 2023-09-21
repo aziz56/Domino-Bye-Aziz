@@ -19,6 +19,6 @@ public class Arena : IArena
             _size = size;
             return true;
         }
-        return false;
+        throw new Exception ("Nama belum di Set");
     }
 }

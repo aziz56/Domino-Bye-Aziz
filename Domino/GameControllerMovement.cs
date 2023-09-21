@@ -80,40 +80,40 @@ public partial class GameController
         _validSideTiles.Add(tile.GetTileSide2());
     }
 
-// private bool FirstValidMove(Tile tile)
-// {
-//     if (_tileOnArena.Count == 0)
-//     {
-//         if (tile.GetTileSide1() == tile.GetTileSide2())
-//         {
-//             tile.SetTileOrientation(TileOrientation.vertical);
-//             _validSideTiles.Add(tile.GetTileSide2());
-//             _validSideTiles.Add(tile.GetTileSide1());
-//         }
-//         else
-//         {
-//             tile.SetTileOrientation(TileOrientation.horizontal);
-//             _validSideTiles.Add(tile.GetTileSide1());
-//             _validSideTiles.Add(tile.GetTileSide2());
-//         }
-//         tile.SetTilePosition(_arena.GetArenaSize() / 2, _arena.GetArenaSize() / 2);
-//         _tileOnArena.Add(tile);
-//         return true;
-//     }
-//     return false;
-// }
 private bool FirstValidMove(Tile tile)
 {
     if (_tileOnArena.Count == 0)
     {
-        _validSideTiles.Add(tile.GetTileSide1());
-        _validSideTiles.Add(tile.GetTileSide2());
+        if (tile.GetTileSide1() == tile.GetTileSide2())
+        {
+            tile.SetTileOrientation(TileOrientation.vertical);
+            _validSideTiles.Add(tile.GetTileSide2());
+            _validSideTiles.Add(tile.GetTileSide1());
+        }
+        else
+        {
+            tile.SetTileOrientation(TileOrientation.horizontal);
+            _validSideTiles.Add(tile.GetTileSide1());
+            _validSideTiles.Add(tile.GetTileSide2());
+        }
         tile.SetTilePosition(_arena.GetArenaSize() / 2, _arena.GetArenaSize() / 2);
         _tileOnArena.Add(tile);
         return true;
     }
     return false;
 }
+// private bool FirstValidMove(Tile tile)
+// {
+//     if (_tileOnArena.Count == 0)
+//     {
+//         _validSideTiles.Add(tile.GetTileSide1());
+//         _validSideTiles.Add(tile.GetTileSide2());
+//         tile.SetTilePosition(_arena.GetArenaSize() / 2, _arena.GetArenaSize() / 2);
+//         _tileOnArena.Add(tile);
+//         return true;
+//     }
+//     return false;
+// }
 
 private bool LeftValidSide(Tile thisTile)
 {
