@@ -1,9 +1,13 @@
+using System.Drawing;
+using System.ComponentModel;
+
 namespace Domino;
+
 
 
 public class Arena : IArena
 {
-    private int _size;
+        private int _size;
     public int GetArenaSize()
     {
         return _size;

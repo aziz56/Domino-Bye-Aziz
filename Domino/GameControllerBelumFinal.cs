@@ -1,6 +1,5 @@
 
 namespace Domino;
-
 public partial class GameController
 {
 
@@ -40,12 +39,7 @@ public partial class GameController
         _tileOnArena = new List<Tile>();
         _verticalTileOnArena = new List<Tile>();
     }
-    /// <summary>
-    /// adding player to the dominoes game when player was created
-    /// adding player also add player with tile in dictionary _playerREsource
-    /// </summary>
-    /// <param name="player">player will have List of tile when adding to the game</param>
-    /// <returns></returns>
+
     public bool AddPlayer(IPlayer player)
     {
         if (player != null)
@@ -83,37 +77,31 @@ public partial class GameController
     {
         return _gameMode;
     }
-    /// <summary>
-    /// generating tile from bone yard if it available
-    /// </summary>
-    /// <param name="player">target generate tile to they hand</param>
-    /// <param name="count">total tile will player pick</param>
-    /// <returns></returns>
-    // public bool GenerateTiles(IPlayer player, int count)
-    public bool GenerateTiles(IPlayer player, int count)
+      public bool GenerateTiles(IPlayer player, int count)
     {
-        if (_deck.GetTilesDeck().Count >= count && _playerData != null)
+        // logger.Info($"{player.GetName()} pick {count} tile from boneyard ");
+        if (_deck.GetTilesDeck()?.Count >= count && _playerData != null)
         {
             for (int i = 0; i < count; i++)
             {
-                Tile tileData = _deck.GetTileData();
-                if (tileData != null)
+                foreach (var Player in _playerData.Keys)
                 {
-                    int a = tileData.GetTileSide1();
-                    int b = tileData.GetTileSide2();
-                    _playerData[player].Add(tileData);
-                    _deck.RemoveData(tileData);
-                }
-                else
-                {
-                    return false; // Not enough tiles in the deck
+                    if (player == Player && count != 0)
+                    {
+                        List<int>? tileData = _deck.GetTileData();
+                        int a = tileData[0];
+                        int b = tileData[1];
+                        _playerData[player].Add(new Tile(a, b));
+                        _deck.RemoveData(tileData);
+                        Console.WriteLine(tileData);
+                    }
                 }
             }
             return true;
         }
-        return false; // Player or deck not found       
+        return false;
     }
-    public bool CheckBoneyardAvailable()
+    public bool CheckDeck()
     {
         if (_deck.GetTilesDeck()?.Count != 0)
         {
@@ -139,7 +127,6 @@ public partial class GameController
         _currentPlayer = _players[index];
     }
 
-    //method for insert tile on board
 
     public void Turn()
     {
@@ -203,16 +190,6 @@ public partial class GameController
         return false;
     }
 
-    /// <summary>
-    /// this method to validate all valid tiles that player can move
-    /// if no valid tile in player tile game management will not give player a chance to move
-    /// </summary>
-    /// <param name="player">check all tile players</param>
-    /// <returns>true if at least have one valid tile to place on board</returns> <summary>
-    /// 
-    /// </summary>
-    /// <param name="player"></param>
-    /// <returns>false if all tile did't have valid number with valid side</returns>
     public bool ValidMove(IPlayer player)
     {
 

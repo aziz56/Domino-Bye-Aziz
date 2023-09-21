@@ -41,9 +41,9 @@ namespace Domino
     {
         if (_side1 >= 0 && _side2 >= 0)
         {
-            _side1 = _side1 - _side2;
-            _side2 = _side1 + _side2;
-            _side1 = _side1 - _side1;
+            int temp = _side1;
+            _side1 = _side2;
+            _side2 = temp;
             return true;
         }
         return false;

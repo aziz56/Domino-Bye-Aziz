@@ -8,9 +8,8 @@ public class Display
         int tileIndex = 0;
         for (int i = 0; i < tiles.Count; i++)
         {
-            Console.WriteLine("   ----- ");
+           
             Console.Write($"({i})|{tiles[tileIndex].GetTileSide1()}|{tiles[tileIndex].GetTileSide2()}|");tileIndex++;
-            Console.WriteLine("____");
         }
         Console.WriteLine();
     }

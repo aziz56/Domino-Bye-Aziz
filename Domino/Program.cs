@@ -38,7 +38,7 @@ class Program
 
         Deck deck= new Deck(6);
         IArena arena = new Arena();
-        arena.SetArenaSize(12);
+        arena.SetArenaSize(20);
 
         game1.AddArena(arena);
         game1.AddDeck(deck);
@@ -46,8 +46,8 @@ class Program
         game1.AddPlayer(player2);
 
 
-        game1.GenerateTiles(player1, 10);
-        game1.GenerateTiles(player2, 10);
+        game1.GenerateTiles(player1, 5);
+        game1.GenerateTiles(player2, 5);
     
         game1.SetGameMode(GameMode.blockmode);
         Console.WriteLine("=====Game Start=====");

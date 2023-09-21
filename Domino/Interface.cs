@@ -1,10 +1,12 @@
+using System.Drawing;
+
 namespace Domino;
 
 
 public interface IArena
 {
-    public int GetArenaSize();
-    public bool SetArenaSize(int size);
+    int GetArenaSize();
+    bool SetArenaSize(int size);
 }
 public interface IPlayer
 {
