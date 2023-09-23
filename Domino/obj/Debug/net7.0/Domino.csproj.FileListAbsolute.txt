@@ -13,3 +13,5 @@ d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\refint\Domino.dll
 d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\Domino.pdb
 d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\Domino.genruntimeconfig.cache
 d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\ref\Domino.dll
+d:\Domino Bye Aziz\Domino\bin\Debug\net7.0\NLog.dll
+d:\Domino Bye Aziz\Domino\obj\Debug\net7.0\Domino.csproj.CopyComplete

@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "ncrboHTAcr65t5bs7dyWyMLxMl66QwZBPsj+RduEZKrznudOfSoe4I+uJARvItDAVs59e2ptW/teRPXs6BGJVQ==",
+  "success": true,
+  "projectFilePath": "d:\\Domino Bye Aziz\\Unit Test\\Unit Test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Azziz\\.nuget\\packages\\coverlet.collector\\3.2.0\\coverlet.collector.3.2.0.nupkg.sha512",
+    "C:\\Users\\Azziz\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Azziz\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
+    "C:\\Users\\Azziz\\.nuget\\packages\\nlog\\5.2.4\\nlog.5.2.4.nupkg.sha512",
+    "C:\\Users\\Azziz\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512",
+    "C:\\Users\\Azziz\\.nuget\\packages\\nunit.analyzers\\3.7.0\\nunit.analyzers.3.7.0.nupkg.sha512",
+    "C:\\Users\\Azziz\\.nuget\\packages\\nunit3testadapter\\4.5.0\\nunit3testadapter.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

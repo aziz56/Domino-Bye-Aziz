@@ -1,0 +1,25 @@
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\Unit Test.deps.json
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\Unit Test.dll
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\Unit Test.pdb
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\Unit Test.csproj.AssemblyReference.cache
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\Unit Test.GeneratedMSBuildEditorConfig.editorconfig
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\Unit Test.AssemblyInfoInputs.cache
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\Unit Test.AssemblyInfo.cs
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\Unit Test.csproj.CoreCompileInputs.cache
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\Unit Test.csproj.CopyComplete
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\Unit Test.dll
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\refint\Unit Test.dll
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\Unit Test.pdb
+d:\Domino Bye Aziz\Unit Test\obj\Debug\net7.0\ref\Unit Test.dll
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\CoverletSourceRootsMapping
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\Domino.deps.json
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\Domino.runtimeconfig.json
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\Domino.exe
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\NUnit3.TestAdapter.dll
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\NUnit3.TestAdapter.pdb
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\nunit.engine.dll
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\nunit.engine.api.dll
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\nunit.engine.core.dll
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\testcentric.engine.metadata.dll
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\Domino.dll
+d:\Domino Bye Aziz\Unit Test\bin\Debug\net7.0\Domino.pdb

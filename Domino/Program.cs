@@ -6,7 +6,7 @@ using DisplayDomino;
 
 class Program
 {
-    [Obsolete]
+
     public static void Main()
     {
 

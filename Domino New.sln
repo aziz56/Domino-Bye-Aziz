@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domino", "Domino\Domino.csproj", "{F99537C2-D4A0-4D9D-9437-E63740355CFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameControllerBelumFinal.Test", "GameControllerBelumFinal.Test\GameControllerBelumFinal.Test.csproj", "{B2FF2443-5BF7-4BF3-9978-4A66B4E4F7D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Test", "Unit Test\Unit Test.csproj", "{44590082-ACCF-45B6-AFBA-286970431A6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +24,9 @@ Global
 		{B2FF2443-5BF7-4BF3-9978-4A66B4E4F7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2FF2443-5BF7-4BF3-9978-4A66B4E4F7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2FF2443-5BF7-4BF3-9978-4A66B4E4F7D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44590082-ACCF-45B6-AFBA-286970431A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44590082-ACCF-45B6-AFBA-286970431A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44590082-ACCF-45B6-AFBA-286970431A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44590082-ACCF-45B6-AFBA-286970431A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
