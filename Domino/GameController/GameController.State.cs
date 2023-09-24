@@ -28,6 +28,7 @@ public partial class GameController
                 }
                 else
                 {
+                    logger.Info(" block mode : game end with zerotile");
                     gameEnded?.Invoke(this, EventArgs.Empty);
                     return true;
                 }
@@ -42,6 +43,7 @@ public partial class GameController
              
                     if (GameEndWithNoSameTiles(_validSideTiles[2]) && GameEndWithNoSameTiles(_validSideTiles[3]))
                     {
+                     
                         gameEnded?.Invoke(this, EventArgs.Empty);
                         return true;
                     }

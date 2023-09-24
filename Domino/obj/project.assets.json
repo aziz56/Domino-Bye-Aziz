@@ -54,11 +54,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Domino Bye Aziz\\Domino\\Domino.csproj",
+      "projectUniqueName": "D:\\Domino Bye Aziz\\Domino\\Domino.csproj",
       "projectName": "Domino",
-      "projectPath": "d:\\Domino Bye Aziz\\Domino\\Domino.csproj",
+      "projectPath": "D:\\Domino Bye Aziz\\Domino\\Domino.csproj",
       "packagesPath": "C:\\Users\\Azziz\\.nuget\\packages\\",
-      "outputPath": "d:\\Domino Bye Aziz\\Domino\\obj\\",
+      "outputPath": "D:\\Domino Bye Aziz\\Domino\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Azziz\\AppData\\Roaming\\NuGet\\NuGet.Config"

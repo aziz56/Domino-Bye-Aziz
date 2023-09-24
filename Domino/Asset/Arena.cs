@@ -7,6 +7,7 @@ public class Arena : IArena
 {
         private int _size;
     public int GetArenaSize()
+
     {
         return _size;
     }

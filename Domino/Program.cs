@@ -3,12 +3,16 @@ using System.Threading.Tasks;
 
 using Domino;
 using DisplayDomino;
-
+using NLog;
 class Program
 {
 
     public static void Main()
     {
+        var currentDirectory = Directory.GetCurrentDirectory();
+        var nlogConfigPath = Path.Combine(currentDirectory, "NLog.config");
+        LogManager.LoadConfiguration(nlogConfigPath);
+        var logger = NLog.LogManager.GetCurrentClassLogger();
 
         GameController game1 = new GameController();
       
@@ -46,8 +50,8 @@ class Program
         game1.AddPlayer(player2);
 
 
-        game1.GenerateTiles(player1, 5);
-        game1.GenerateTiles(player2, 5);
+        game1.GenerateTiles(player1, 1);
+        game1.GenerateTiles(player2, 1);
     
         game1.SetGameMode(GameMode.blockmode);
         Console.WriteLine("=====Game Start=====");
@@ -58,12 +62,6 @@ class Program
             game1.GetPlayerTiles(player2);
             Console.Clear();
             Console.Write("waiting for validate turn and create board ");
-            //Task.Delay(1000);
-            Console.Write(". ");
-            //Task.Delay(1000);
-            Console.Write(". ");
-            //Task.Delay(1000);
-            Console.WriteLine(". ");
             Display.DrawBoard(arena, game1.GetTileOnBoard(), game1.GetTileVerticalOnArena());
             Console.WriteLine("=========================================");
             Console.WriteLine($"Now is {game1.GetCurrentPlayer().GetName()} Turn");

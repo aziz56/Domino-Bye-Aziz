@@ -1,8 +1,9 @@
 
 namespace Domino;
+using NLog;
 public partial class GameController
 {
-
+private static readonly Logger logger =LogManager.GetCurrentClassLogger();
     //variabel that game runner needed
     private List<IPlayer> _players;
     private Dictionary<IPlayer, List<Tile>> _playerData;
@@ -81,6 +82,7 @@ public partial class GameController
     {
   
         if (_deck.GetTilesDeck()?.Count >= count && _playerData != null)
+       logger.Info($"{player.GetName()} pick {count} tile from boneyard ");
         {
             for (int i = 0; i < count; i++)
             {
